@@ -2,13 +2,14 @@ image: archlinux
 packages:
   - pacman-contrib
 sources:
-  #- https://git.sr.ht/~statianzo/PKGBUILD-cloud66-toolbelt.git
-  - https://aur.archlinux.org/cloud66-toolbelt.git
+  - https://git.sr.ht/~statianzo/pkgbuild-cloud66-toolbelt.git
+  - ssh://aur@aur.archlinux.org/cloud66-toolbelt.git
 secrets:
+  - 95c04d66-18fe-478f-ac62-270318a9efac
 tasks:
-  #- copy: |
-      #cp PKGBUILD-cloud-66-toolbelt/PKGBUILD cloud66-toolbelt/PKGBUILD
-      #cp PKGBUILD-cloud-66-toolbelt/Makefile cloud66-toolbelt/Makefile
+  - copy: |
+      cp PKGBUILD-cloud-66-toolbelt/PKGBUILD cloud66-toolbelt/PKGBUILD
+      cp PKGBUILD-cloud-66-toolbelt/Makefile cloud66-toolbelt/Makefile
   - build: |
       cd cloud66-toolbelt
       make update
