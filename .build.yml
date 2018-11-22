@@ -1,0 +1,23 @@
+image: archlinux
+packages:
+  - pacman-contrib
+sources:
+  #- https://git.sr.ht/~statianzo/PKGBUILD-cloud66-toolbelt.git
+  - https://aur.archlinux.org/cloud66-toolbelt.git
+secrets:
+tasks:
+  #- copy: |
+      #cp PKGBUILD-cloud-66-toolbelt/PKGBUILD cloud66-toolbelt/PKGBUILD
+      #cp PKGBUILD-cloud-66-toolbelt/Makefile cloud66-toolbelt/Makefile
+  - build: |
+      cd cloud66-toolbelt
+      make update
+  - test: |
+      cd cloud66-toolbelt
+      git config user.email "srht-build@jxs.me"
+      git config user.name "srht-build@jxs.me"
+      makepkg --syncdeps --install
+      cx --version
+  - publish: |
+      cd cloud66-toolbelt
+      ssh-keyscan aur.archlinux.org >> ~/.ssh/known_hosts
